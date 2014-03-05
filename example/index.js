@@ -9,7 +9,7 @@
  */
 'use strict';
 
-var grunttool = require('../lib/grunttool.js'),
+var api = require('../lib/api.js'),
     fs = require('fs'),
     beautify = require('js-beautify').js_beautify,
     gruntfile = fs.readFileSync('Gruntfile.js');
@@ -17,7 +17,7 @@ var grunttool = require('../lib/grunttool.js'),
 
 var task = "testtask: {tests: ['test/**/*_test.js']}";
 
-var output = grunttool.init(gruntfile)
+var output = api.init(gruntfile)
     .addGlobalDeclaration('var test = 42;')
     .registerTask("grunt.registerTask('default', [42]);")
     .addTask(task)

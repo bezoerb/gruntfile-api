@@ -1,8 +1,8 @@
 {
-    "name": "grunttool",
+    "name": "gruntfile-api",
     "version": "0.0.0",
-    "main": "lib/grunttool.js",
-    "description": "programmatically modify gruntfile",
+    "main": "lib/api.js",
+    "description": "Api to programmatically modify a gruntfile",
     "homepage": "user/repo",
     "bugs": "user/repo/issues",
     "author": {

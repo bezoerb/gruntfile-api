@@ -1,6 +1,6 @@
 'use strict';
 
-var grunttool = require('../lib/grunttool.js'),
+var api = require('../lib/api.js'),
     fs = require('fs');
 
 /*
@@ -25,7 +25,7 @@ var grunttool = require('../lib/grunttool.js'),
 
 var gruntfile = fs.readFileSync('Gruntfile.js');
 
-exports.grunttool = {
+exports.api = {
     setUp: function(done) {
         // setup here
         done();
@@ -33,7 +33,7 @@ exports.grunttool = {
     'global declaration': function(test) {
         test.expect(1);
 
-        var output = grunttool.init(gruntfile)
+        var output = api.init(gruntfile)
             .addGlobalDeclaration('var test = 42;')
             .getScript();
 
@@ -43,7 +43,7 @@ exports.grunttool = {
     },
     'register task': function(test) {
         test.expect(1);
-        var output = grunttool.init(gruntfile)
+        var output = api.init(gruntfile)
             .registerTask("grunt.registerTask('default', [42]);")
             .getScript();
 
@@ -57,7 +57,7 @@ exports.grunttool = {
             files: ['test/**/*_test.js'] \
         }";
 
-        var output = grunttool.init(gruntfile)
+        var output = api.init(gruntfile)
             .addTask(task)
             .getScript();
 
@@ -72,7 +72,7 @@ exports.grunttool = {
             nodeunitfiles: ['test/**/*_test.js'] \
         }";
 
-        var output = grunttool.init(gruntfile)
+        var output = api.init(gruntfile)
             .addTask(task)
             .getScript();
 
@@ -87,7 +87,7 @@ exports.grunttool = {
             nodeunitfiles: ['test/**/*_test.js'] \
         }";
 
-        var output = grunttool.init(gruntfile)
+        var output = api.init(gruntfile)
             .addTask(task)
             .getScript();
 
