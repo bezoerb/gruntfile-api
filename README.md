@@ -1,4 +1,4 @@
-# grunttool [![Build Status](https://secure.travis-ci.org/bezoerb/grunttool.png?branch=master)](http://travis-ci.org/bezoerb/grunttool)
+# grunttool [![Build Status](https://secure.travis-ci.org/bezoerb/gruntfile-api.png?branch=master)](http://travis-ci.org/bezoerb/gruntfile-api)
 
 Api to programmatically modify your gruntfile
 
@@ -7,11 +7,11 @@ THIS IS IN VERY EARLY DEVELOPMENT
 
 
 ## Getting Started
-Install the module with: `npm install grunttool`
+Install the module with: `npm install gruntfile-api`
 
 ```javascript
-var grunttool = require('grunttool');
-var output = grunttool.init(gruntfile)
+var api = require('gruntfile-api');
+var output = api.init(gruntfile)
     .addGlobalDeclaration('var test = 42;')
     .registerTask("grunt.registerTask('default', [42]);")
     .addTask(task)
