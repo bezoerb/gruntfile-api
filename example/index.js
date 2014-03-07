@@ -15,12 +15,15 @@ var api = require('../lib/api.js'),
     gruntfile = fs.readFileSync('Gruntfile.js');
 
 
-var task = "testtask: {tests: ['test/**/*_test.js']}";
 
 var output = api.init(gruntfile)
-    .addGlobalDeclaration('var test = 42;')
-    .registerTask("grunt.registerTask('default', [42]);")
-    .addTask(task)
+    .addGlobalDeclaration('test1',[1,2,3,{d:4}])
+    .addGlobalDeclaration('test2',42)
+    .addGlobalDeclaration('test3','abc')
+    .addGlobalDeclaration('test4',{a:77,b:[1,2,3],c:function(test){ return test * test; }})
+
+    .registerTask('default', [42])
+    .addTask('testtask',{tests: ['test/**/*_test.js']})
     .getScript();
 
 

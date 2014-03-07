@@ -12,9 +12,11 @@ Install the module with: `npm install gruntfile-api`
 ```javascript
 var api = require('gruntfile-api');
 var output = api.init(gruntfile)
-    .addGlobalDeclaration('var test = 42;')
-    .registerTask("grunt.registerTask('default', [42]);")
-    .addTask(task)
+    .addGlobalDeclaration('test',42)
+    .registerTask('default', ['jshint'])
+    .addTask('jshint',{test: {
+       src: ['test/**/*.js','!test/fixtures/**/*.js']
+    }})
     .getScript();
 ```
 

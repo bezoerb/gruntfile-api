@@ -30,22 +30,71 @@ exports.api = {
         // setup here
         done();
     },
-    'global declaration': function(test) {
+    'global declaration int': function(test) {
         test.expect(1);
 
         var output = api.init(gruntfile)
-            .addGlobalDeclaration('var test = 42;')
+            .addGlobalDeclaration('test',42)
             .getScript();
+
 
         test.ok(/test\s=\s42/.test(output),'Output should have global declaration attached');
 
         test.done();
     },
+    'global declaration string': function(test) {
+        test.expect(1);
+
+        var output = api.init(gruntfile)
+            .addGlobalDeclaration('test','42')
+            .getScript();
+
+
+        test.ok(/test\s=\s'42'/.test(output),'Output should have global declaration attached');
+
+        test.done();
+    },
+    'global declaration array': function(test) {
+        test.expect(1);
+
+        var output = api.init(gruntfile)
+            .addGlobalDeclaration('test',[42])
+            .getScript();
+
+
+        test.ok(/test\s=\s\[42\]/.test(output),'Output should have global array attached');
+
+        test.done();
+    },
+    'global declaration object': function(test) {
+        test.expect(1);
+
+        var output = api.init(gruntfile)
+            .addGlobalDeclaration('test',{a:'42'})
+            .getScript();
+
+
+        test.ok(/test\s=\s\{ a: '42' \}/.test(output),'Output should have global object attached');
+
+        test.done();
+    },
+    'global declaration function': function(test) {
+        test.expect(2);
+
+        var output = api.init(gruntfile)
+            .addGlobalDeclaration('test',function(x){return x*x;})
+            .getScript();
+
+        test.ok(/test\s=\sfunction\(x\)\{/);
+        test.ok(/return x * x;/);
+        test.done();
+    },
     'register task': function(test) {
         test.expect(1);
         var output = api.init(gruntfile)
-            .registerTask("grunt.registerTask('default', [42]);")
+            .registerTask('default', [42])
             .getScript();
+
 
         test.ok(/grunt\.registerTask\('default', \[42\]\);/.test(output),'Output should have default task attached');
 
@@ -53,14 +102,10 @@ exports.api = {
     },
     'add duplicate task config': function(test){
         test.expect(2);
-        var task = "nodeunit: { \
-            files: ['test/**/*_test.js'] \
-        }";
 
         var output = api.init(gruntfile)
-            .addTask(task)
+            .addTask('nodeunit',{files: ['test/**/*_test.js']})
             .getScript();
-
 
         test.ok((output.match(/nodeunit:/g) || []).length === 1,'Output should not have additional task attached');
         test.ok((output.match(/files:/g) || []).length === 4,'Output should not have additional task property attached');
@@ -68,12 +113,9 @@ exports.api = {
     },
     'add task config option': function(test){
         test.expect(2);
-        var task = "nodeunit: { \
-            nodeunitfiles: ['test/**/*_test.js'] \
-        }";
 
         var output = api.init(gruntfile)
-            .addTask(task)
+            .addTask('nodeunit',{nodeunitfiles: ['test/**/*_test.js']})
             .getScript();
 
 
@@ -83,12 +125,9 @@ exports.api = {
     },
     'add task config': function(test){
         test.expect(2);
-        var task = "testtask: { \
-            nodeunitfiles: ['test/**/*_test.js'] \
-        }";
 
         var output = api.init(gruntfile)
-            .addTask(task)
+            .addTask('testtask',{nodeunitfiles: ['test/**/*_test.js']})
             .getScript();
 
 
