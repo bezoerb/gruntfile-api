@@ -121,7 +121,7 @@ watch: {
 }
 ```
 
-or adds the gruntfile target to an existing watch configuration
+or adds the watch target to an existing watch configuration
 
 ```javascript
 watch: {
