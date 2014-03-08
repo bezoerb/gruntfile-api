@@ -35,7 +35,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .addGlobalDeclaration('test',42)
-            .getScript();
+            .toString();
 
 
         test.ok(/test\s=\s42/.test(output),'Output should have global declaration attached');
@@ -47,7 +47,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .addGlobalDeclaration('test','42')
-            .getScript();
+            .toString();
 
 
         test.ok(/test\s=\s'42'/.test(output),'Output should have global declaration attached');
@@ -59,7 +59,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .addGlobalDeclaration('test',[42])
-            .getScript();
+            .toString();
 
 
         test.ok(/test\s=\s\[42\]/.test(output),'Output should have global array attached');
@@ -71,7 +71,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .addGlobalDeclaration('test',{a:'42'})
-            .getScript();
+            .toString();
 
 
         test.ok(/test\s=\s\{ a: '42' \}/.test(output),'Output should have global object attached');
@@ -83,7 +83,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .addGlobalDeclaration('test',function(x){return x*x;})
-            .getScript();
+            .toString();
 
         test.ok(/test\s+=\s+function\s*\(x\)\s*\{/.test(output));
         test.ok(/return\s+x\s+\*\s*x;/.test(output));
@@ -93,7 +93,7 @@ exports.api = {
         test.expect(1);
         var output = api.init(gruntfile)
             .registerTask('default', [42])
-            .getScript();
+            .toString();
 
 
         test.ok(/grunt\.registerTask\('default', \[42\]\);/.test(output),'Output should have default task attached');
@@ -105,7 +105,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .insertConfig('nodeunit',{files: ['test/**/*_test.js']})
-            .getScript();
+            .toString();
 
         test.ok((output.match(/nodeunit:/g) || []).length === 1,'Output should not have additional task attached');
         test.ok((output.match(/files:/g) || []).length === 4,'Output should not have additional task property attached');
@@ -116,7 +116,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .insertConfig('nodeunit',{nodeunitfiles: ['test/**/*_test.js']})
-            .getScript();
+            .toString();
 
 
         test.ok((output.match(/nodeunit:/g) || []).length === 1,'Output should not have additional task attached');
@@ -128,7 +128,7 @@ exports.api = {
 
         var output = api.init(gruntfile)
             .insertConfig('testtask',{nodeunitfiles: ['test/**/*_test.js']})
-            .getScript();
+            .toString();
 
 
         test.ok((output.match(/testtask:/g) || []).length === 1,'Output should not have additional task attached');

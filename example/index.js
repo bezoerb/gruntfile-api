@@ -24,7 +24,7 @@ var output = api.init(gruntfile)
 
     .registerTask('default', [42])
     .addTask('testtask',{tests: ['test/**/*_test.js']})
-    .getScript();
+    .toString();
 
 
 output = beautify(output, {

@@ -15,7 +15,7 @@ var api = require('gruntfile-api'),
 
 var output = api.init(gruntfileData)
     // change something
-    .getScript();
+    .toString();
 ```
 
 ## Documentation
@@ -139,7 +139,7 @@ watch: {
 ### Get the updated Gruntfile content
 
 ```javascript
-api.getScript()
+api.toString()
 ```
 
 
