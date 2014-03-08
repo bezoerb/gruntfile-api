@@ -9,13 +9,12 @@ THIS IS IN VERY EARLY DEVELOPMENT
 Install the module with: `npm install gruntfile-api`
 
 ```javascript
-var api = require('gruntfile-api');
-var output = api.init(gruntfile)
-    .addGlobalDeclaration('test',42)
-    .registerTask('default', ['jshint'])
-    .insertConfig('jshint',{test: {
-       src: ['test/**/*.js','!test/fixtures/**/*.js']
-    }})
+var api = require('gruntfile-api'),
+    fs = require('fs'),
+    gruntfileData = fs.readFileSync('Gruntfile.js');
+
+var output = api.init(gruntfileData)
+    // change something
     .getScript();
 ```
 
@@ -27,7 +26,7 @@ Add a global variable declaration to the gruntfile.
 declarations get seamlessly integrated into existing declaration structures
 
 ```javascript
-	api.addGlobalDeclaration(identifier,value)
+api.addGlobalDeclaration(identifier,value)
 ```
 #### parameter.identifier
 Type: `string`
@@ -38,25 +37,25 @@ Type: `mixed`
 ### example
 
 ```javascript
-	api.addGlobalDeclaration('defaultTasks',['jshint','uglify'])
+api.addGlobalDeclaration('defaultTasks',['jshint','uglify'])
 ```
 
 adds the following code right before `module.exports = function (grunt)`
 
 ```javascript
-	var defaultTasks = ['jshint','uglify'];
-
-	or
-
-	var varA = 'something',
-		varB = 'something else',
-		defaultTasks = ['jshint','uglify'];
+var defaultTasks = ['jshint','uglify'];
+```
+or
+```javascript
+var varA = 'something',
+    varB = 'something else',
+    defaultTasks = ['jshint','uglify'];
 ```
 
 ### Register task
 
 ```javascript
-	api.registerTask(identifier,value)
+api.registerTask(identifier,value)
 ```
 #### parameter.identifier
 Type: `string`
@@ -71,13 +70,13 @@ The task which are invoked
 ### example
 
 ```javascript
-	api.registerTask('default',['jshint','uglify'])
+api.registerTask('default',['jshint','uglify'])
 ```
 
 adds the following code to the gruntfile
 
 ```javascript
-	grunt.registerTask('default', ['jshint', 'uglify']);
+grunt.registerTask('default', ['jshint', 'uglify']);
 ```
 
 ### Insert task config
@@ -87,7 +86,7 @@ Existing configurations should not be overwritten.
 
 
 ```javascript
-	api.insertConfig(name,descriptor)
+api.insertConfig(name,descriptor)
 ```
 #### parameter.name
 Type: `string`
@@ -103,44 +102,44 @@ The task configuration
 ### example
 
 ```javascript
-	api.insertConfig('watch', {
-       gruntfile: {
+api.insertConfig('watch', {
+    gruntfile: {
          files: 'Gruntfile.js',
          tasks: ['jshint:gruntfile']
-       }
-    })
+    }
+})
 ```
 
 adds the following code to the gruntfile
 
 ```javascript
-	watch: {
-      gruntfile: {
+watch: {
+    gruntfile: {
         files: 'Gruntfile.js',
         tasks: ['jshint:gruntfile']
-      }
     }
+}
 ```
 
 or adds the gruntfile target to an existing watch configuration
 
 ```javascript
-	watch: {
-		lib: {
-            files: 'lib/**/*.js',
-            tasks: ['jshint:lib', 'nodeunit']
-        },
-	    gruntfile: {
-	        files: 'Gruntfile.js',
-	        tasks: ['jshint:gruntfile']
-	    }
+watch: {
+    lib: {
+        files: 'lib/**/*.js',
+        tasks: ['jshint:lib', 'nodeunit']
+    },
+    gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: ['jshint:gruntfile']
     }
+}
 ```
 
 ### Get the updated Gruntfile content
 
 ```javascript
-	api.getScript()
+api.getScript()
 ```
 
 
