@@ -5,7 +5,6 @@ Api to programmatically modify your gruntfile
 THIS IS IN VERY EARLY DEVELOPMENT
 
 
-
 ## Getting Started
 Install the module with: `npm install gruntfile-api`
 
@@ -14,17 +13,140 @@ var api = require('gruntfile-api');
 var output = api.init(gruntfile)
     .addGlobalDeclaration('test',42)
     .registerTask('default', ['jshint'])
-    .addTask('jshint',{test: {
+    .insertConfig('jshint',{test: {
        src: ['test/**/*.js','!test/fixtures/**/*.js']
     }})
     .getScript();
 ```
 
 ## Documentation
-_(Coming soon)_
+
+### Add global declaration
+
+Add a global variable declaration to the gruntfile.
+declarations get seamlessly integrated into existing declaration structures
+
+```javascript
+	api.addGlobalDeclaration(identifier,value)
+```
+#### parameter.identifier
+Type: `string`
+
+#### parameter.value
+Type: `mixed`
+
+### example
+
+```javascript
+	api.addGlobalDeclaration('defaultTasks',['jshint','uglify'])
+```
+
+adds the following code right before `module.exports = function (grunt)`
+
+```javascript
+	var defaultTasks = ['jshint','uglify'];
+
+	or
+
+	var varA = 'something',
+		varB = 'something else',
+		defaultTasks = ['jshint','uglify'];
+```
+
+### Register task
+
+```javascript
+	api.registerTask(identifier,value)
+```
+#### parameter.identifier
+Type: `string`
+
+The task identifier
+
+#### parameter.value
+Type: `mixed`
+
+The task which are invoked
+
+### example
+
+```javascript
+	api.registerTask('default',['jshint','uglify'])
+```
+
+adds the following code to the gruntfile
+
+```javascript
+	grunt.registerTask('default', ['jshint', 'uglify']);
+```
+
+### Insert task config
+
+Insert Task configuration to the Gruntfile.
+Existing configurations should not be overwritten.
+
+
+```javascript
+	api.insertConfig(name,descriptor)
+```
+#### parameter.name
+Type: `string`
+
+The task identifier
+
+
+#### parameter.descriptor
+Type: `mixed`
+
+The task configuration
+
+### example
+
+```javascript
+	api.insertConfig('watch', {
+       gruntfile: {
+         files: 'Gruntfile.js',
+         tasks: ['jshint:gruntfile']
+       }
+    })
+```
+
+adds the following code to the gruntfile
+
+```javascript
+	watch: {
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: ['jshint:gruntfile']
+      }
+    }
+```
+
+or adds the gruntfile target to an existing watch configuration
+
+```javascript
+	watch: {
+		lib: {
+            files: 'lib/**/*.js',
+            tasks: ['jshint:lib', 'nodeunit']
+        },
+	    gruntfile: {
+	        files: 'Gruntfile.js',
+	        tasks: ['jshint:gruntfile']
+	    }
+    }
+```
+
+### Get the updated Gruntfile content
+
+```javascript
+	api.getScript()
+```
+
 
 ## Examples
-_(Coming soon)_
+
+See examples/index.js
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

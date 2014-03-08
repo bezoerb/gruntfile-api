@@ -85,8 +85,8 @@ exports.api = {
             .addGlobalDeclaration('test',function(x){return x*x;})
             .getScript();
 
-        test.ok(/test\s=\sfunction\(x\)\{/);
-        test.ok(/return x * x;/);
+        test.ok(/test\s+=\s+function\s*\(x\)\s*\{/.test(output));
+        test.ok(/return\s+x\s+\*\s*x;/.test(output));
         test.done();
     },
     'register task': function(test) {
@@ -104,7 +104,7 @@ exports.api = {
         test.expect(2);
 
         var output = api.init(gruntfile)
-            .addTask('nodeunit',{files: ['test/**/*_test.js']})
+            .insertConfig('nodeunit',{files: ['test/**/*_test.js']})
             .getScript();
 
         test.ok((output.match(/nodeunit:/g) || []).length === 1,'Output should not have additional task attached');
@@ -115,7 +115,7 @@ exports.api = {
         test.expect(2);
 
         var output = api.init(gruntfile)
-            .addTask('nodeunit',{nodeunitfiles: ['test/**/*_test.js']})
+            .insertConfig('nodeunit',{nodeunitfiles: ['test/**/*_test.js']})
             .getScript();
 
 
@@ -127,7 +127,7 @@ exports.api = {
         test.expect(2);
 
         var output = api.init(gruntfile)
-            .addTask('testtask',{nodeunitfiles: ['test/**/*_test.js']})
+            .insertConfig('testtask',{nodeunitfiles: ['test/**/*_test.js']})
             .getScript();
 
 
