@@ -25,6 +25,7 @@ var output = api.init(gruntfile)
     .registerTask('default', [42])
     .insertConfig('testtask',{  tests: ['test/**/*_test.js'] })
     .insertRawConfig('testtask','{ abc : (new Date()).getTime() }')
+    .insertRawConfig('watch', "{  js: { options: { time: (new Date()).getTime() }, files: MYPREVIOUSDECLAREDFILES, tasks: ['jshint'] } }")
     .toString();
 
 var tasks = api.getJsonTasks();

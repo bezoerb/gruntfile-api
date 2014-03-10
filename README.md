@@ -83,6 +83,8 @@ grunt.registerTask('default', ['jshint', 'uglify']);
 
 Insert Task configuration to the Gruntfile.
 Existing configurations should not be overwritten.
+Keep in mind that variable names or function calls will be evaluated when passed toe the function line this
+When there's the need for variables or date objects use `insertRawConfig`
 
 
 ```javascript
@@ -104,8 +106,11 @@ The task configuration
 ```javascript
 api.insertConfig('watch', {
     gruntfile: {
-         files: 'Gruntfile.js',
-         tasks: ['jshint:gruntfile']
+        options: {
+            time: (new Date()).getTime()
+        },
+        files: 'Gruntfile.js',
+        tasks: ['jshint:gruntfile']
     }
 })
 ```
@@ -115,6 +120,9 @@ adds the following code to the gruntfile
 ```javascript
 watch: {
     gruntfile: {
+        options: {
+            time: 1394485101147
+        },
         files: 'Gruntfile.js',
         tasks: ['jshint:gruntfile']
     }
@@ -130,11 +138,55 @@ watch: {
         tasks: ['jshint:lib', 'nodeunit']
     },
     gruntfile: {
+        options: {
+            time: 1394485101147
+        },
         files: 'Gruntfile.js',
         tasks: ['jshint:gruntfile']
     }
 }
 ```
+
+### Insert RAW task config
+
+Insert task configuration to the Gruntfile as String to prevent code evaluation
+
+
+```javascript
+api.insertRawConfig(name,descriptor)
+```
+#### parameter.name
+Type: `string`
+
+The task identifier
+
+
+#### parameter.descriptor
+Type: `string`
+
+The task configuration as string.
+
+### example
+
+```javascript
+api.insertRawConfig('watch', "{  js: { options: { time: (new Date()).getTime() }, files: MYPREVIOUSDECLAREDFILES, tasks: ['jshint'] } }")
+```
+
+adds the following code to the gruntfile
+
+```javascript
+watch: {
+    js: {
+        options: {
+            time: (new Date()).time()
+        },
+        files: MYPREVIOUSDECLAREDFILES,
+        tasks: ['jshint']
+    }
+}
+```
+
+or appends it.
 
 ### Get the updated Gruntfile content
 
