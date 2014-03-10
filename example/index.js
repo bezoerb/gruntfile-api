@@ -12,7 +12,8 @@
 var api = require('../lib/api.js'),
     fs = require('fs'),
     beautify = require('js-beautify').js_beautify,
-    gruntfile = fs.readFileSync('Gruntfile.js');
+    gruntfile = fs.readFileSync('Gruntfile.js'),
+    multiline = require('multiline');
 
 
 
@@ -25,7 +26,17 @@ var output = api.init(gruntfile)
     .registerTask('default', [42])
     .insertConfig('testtask',{  tests: ['test/**/*_test.js'] })
     .insertRawConfig('testtask','{ abc : (new Date()).getTime() }')
-    .insertRawConfig('watch', "{  js: { options: { time: (new Date()).getTime() }, files: MYPREVIOUSDECLAREDFILES, tasks: ['jshint'] } }")
+    .insertRawConfig('watch', multiline(function(){/*
+        {
+            js: {
+                options: {
+                    time: (new Date()).getTime()
+                },
+                files: MYPREVIOUSDECLAREDFILES,
+                tasks: ['jshint']
+            }
+        }
+    */}))
     .toString();
 
 var tasks = api.getJsonTasks();
