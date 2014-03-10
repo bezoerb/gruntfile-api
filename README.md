@@ -143,6 +143,13 @@ api.toString()
 ```
 
 
+### Get JSON object with all configured tasks
+
+```javascript
+api.getJsonTasks()
+```
+
+
 ## Examples
 
 See examples/index.js
