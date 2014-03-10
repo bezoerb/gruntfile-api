@@ -134,5 +134,18 @@ exports.api = {
         test.ok((output.match(/testtask:/g) || []).length === 1,'Output should not have additional task attached');
         test.ok((output.match(/nodeunitfiles:/g) || []).length === 1,'Output should not have additional task property attached');
         test.done();
+    },
+    'add raw task config': function(test){
+        test.expect(2);
+
+        var output = api.init(gruntfile)
+            .insertConfig('testtask','{nodeunitfiles: (new Date()).getTime()}')
+            .toString();
+
+
+        console.log(output);
+        test.ok((output.match(/testtask:/g) || []).length === 1,'Output should have additional task attached');
+        test.ok((output.match(/nodeunitfiles\s*:\s*\(new Date\(\)\)\.getTime\(\)/g) || []).length === 1,'Output should have additional task property attached');
+        test.done();
     }
 };

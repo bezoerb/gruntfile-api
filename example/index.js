@@ -23,7 +23,8 @@ var output = api.init(gruntfile)
     .addGlobalDeclaration('test4',{a:77,b:[1,2,3],c:function(test){ return test * test; }})
 
     .registerTask('default', [42])
-    .insertConfig('testtask',{tests: ['test/**/*_test.js']})
+    .insertConfig('testtask',{  tests: ['test/**/*_test.js'] })
+    .insertRawConfig('testtask','{ abc : (new Date()).getTime() }')
     .toString();
 
 var tasks = api.getJsonTasks();
