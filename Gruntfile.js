@@ -45,7 +45,7 @@ module.exports = function(grunt) {
     // Default task.
     grunt.registerTask('default', ['jshint', 'nodeunit']);
 
-    grunt.registerTask('test', function(t) {
+    grunt.registerTask('test', function() {
         grunt.task.run(['jshint']);
 
     });
