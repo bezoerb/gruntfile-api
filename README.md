@@ -54,6 +54,16 @@ var varA = 'something',
 
 ### Register task
 
+Register grunt task with `grunt.registerTask`.
+when there already is a task registered with the same identifier. The tasks will get merged based on the `mergeType` argument unless this one is invalid or `skip`
+Merge will be done in one of the following ways depending on the mergeType:
+
+* registered task is `array` and task is `array` -> default merge
+* registered task is `function` and task is `array` -> merge will add grunt.task.run(tasks) to registered task body
+* registered task is `array` and task is `function` -> merge will add grunt.task.run(registered tasks) to task body
+* registered task is `function` and task is `function` -> merge will add task function body to registered task function body
+
+
 ```javascript
 api.registerTask(identifier,value)
 ```
@@ -63,9 +73,15 @@ Type: `string`
 The task identifier
 
 #### parameter.value
-Type: `mixed`
+Type: `array|function`
 
 The task which are invoked
+
+#### parameter.mergeType
+Type: `string` can be one of the following: `['prepend','append','overwrite','skip']`
+Default: `'append'`
+
+How should tasks should be merged when there already is a task with the same identifier registered
 
 ### example
 
@@ -78,6 +94,29 @@ adds the following code to the gruntfile
 ```javascript
 grunt.registerTask('default', ['jshint', 'uglify']);
 ```
+### merge example
+
+```javascript
+api.registerTask('default',['jshint'],'prepend');
+```
+
+gruntfile before
+
+```javascript
+grunt.registerTask('default', function(target) {
+	grunt.task.run(['uglify']);
+};
+```
+
+gruntfile after
+
+```javascript
+grunt.registerTask('default', function(target) {
+	grunt.task.run(['jshint']);
+	grunt.task.run(['uglify']);
+};
+```
+
 
 ### Insert task config
 
