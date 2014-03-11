@@ -96,7 +96,18 @@ exports.api = {
             .toString();
 
 
-        test.ok(/grunt\.registerTask\('default', \[42\]\);/.test(output),'Output should have default task attached');
+        test.ok(!/grunt\.registerTask\('default', \[42\]\);/.test(output),'Output should have default task appended');
+
+        test.done();
+    },
+    'register task2': function(test) {
+        test.expect(1);
+        var output = api.init(gruntfile)
+            .registerTask('default2', [42])
+            .toString();
+
+
+        test.ok(!/grunt\.registerTask\('default2', \[42\]\);/.test(output),'Output should not have default task attached');
 
         test.done();
     },
