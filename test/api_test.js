@@ -153,8 +153,6 @@ exports.api = {
             .insertConfig('testtask','{nodeunitfiles: (new Date()).getTime()}')
             .toString();
 
-
-        console.log(output);
         test.ok((output.match(/testtask:/g) || []).length === 1,'Output should have additional task attached');
         test.ok((output.match(/nodeunitfiles\s*:\s*\(new Date\(\)\)\.getTime\(\)/g) || []).length === 1,'Output should have additional task property attached');
         test.done();
