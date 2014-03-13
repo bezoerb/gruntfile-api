@@ -11,6 +11,17 @@ module.exports = function(grunt) {
         nodeunit: {
             files: ['test/**/*_test.js']
         },
+        // Unit tests.
+        simplemocha: {
+            options: {
+                globals: ['should'],
+                timeout: 3000,
+                ignoreLeaks: false,
+                ui: 'bdd'
+            },
+
+            all: { src: ['test/**/*-test.js'] }
+        },
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
@@ -43,7 +54,7 @@ module.exports = function(grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'nodeunit']);
+    grunt.registerTask('default', ['jshint', 'simplemocha','nodeunit']);
 
     grunt.registerTask('test', function() {
         grunt.task.run(['jshint']);

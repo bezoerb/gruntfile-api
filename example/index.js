@@ -23,15 +23,15 @@ var output = api.init(gruntfile)
 //    .addGlobalDeclaration('test3','abc')
 //    .addGlobalDeclaration('test4',{a:77,b:[1,2,3],c:function(test){ return test * test; }})
 //
-//    .registerTask('default', [42])
+    .registerTask('defaultdefault', [42])
 //    .registerTask('default', function(target){
 //        grunt.task.run(['jshint']);
 //    })
-    .registerTask('test', function(target,t2){
-        if (target === 'build') {
-            grunt.task.run(['watch']);
-        }
-    },'skip')
+//    .registerTask('test', function(target,t2){
+//        if (target === 'build') {
+//            grunt.task.run(['watch']);
+//        }
+//    },'skip')
 //    .registerTask('test', [42])
 //    .insertConfig('testtask',{  tests: ['test/**/*_test.js'] })
 //    .insertRawConfig('testtask','{ abc : (new Date()).getTime() }')
