@@ -32,13 +32,11 @@ describe('hasTaskRegistered', function() {
         });
     });
 
-    it('should return true for ever configured task', function() {
-        var expected = ['yeoman','clean','watch','less','php2html','jshint','mocha','bower','requirejs','modernizr',
-            'processhtml','useminPrepare','usemin','imagemin','svgmin','cssmin','uncss','htmlmin','prettify','rev',
-            'copy','concurrent','open','connect','plato'];
+    it('should return true for ever registered task', function() {
+        var expected = ['server','test','build','default'];
 
         expected.forEach(function(identifier){
-            assert.ok(api.hasConfig(identifier),'It should have config "' + identifier + '"');
+            assert.ok(api.hasTaskRegistered(identifier),'It should have task "' + identifier + '" registered');
         });
 
     });
