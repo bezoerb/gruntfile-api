@@ -77,7 +77,10 @@ module.exports = function (grunt) {
                     // relative links should be renamed from .php to .html
                     processLinks: true,
                     htmlhint: true,
-                    docroot: '<%= yeoman.app %>'
+                    docroot: '<%= yeoman.app %>',
+                    process: function(test){
+                        return test;
+                    }
                 },
                 files: [
                     {expand: true, cwd: yeomanConfig.app, src: ['**/*.php','!bower_components/**/*.php'], dest: '.tmp', ext: '.html' }
