@@ -282,6 +282,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 v0.0.1 - First very alpha!
+
 v0.0.2 - Added some more functionality to the api
 
 ## License
