@@ -236,10 +236,42 @@ api.toString()
 
 ### Get JSON object with all configured tasks
 
+Invalid JSON Objects like variables or functions will added as String for information purpose
+
 ```javascript
 api.getJsonTasks()
 ```
 
+### Test Gruntfile for task config
+
+Invalid JSON Objects like variables or functions will added as String for information purpose
+
+```javascript
+api.hasConfig(identifier)
+```
+
+#### parameter.identifier
+Type: `string`
+
+The task identifier
+
+### Test Gruntfile for property inside task config
+
+Invalid JSON Objects like variables or functions will added as String for information purpose
+
+```javascript
+api.hasConfigProperty(identifier, property)
+```
+
+#### parameter.identifier
+Type: `string`
+
+The task identifier
+
+#### parameter.property
+Type: `string`|`array`
+
+The property identifier
 
 ## Examples
 
@@ -249,7 +281,8 @@ See examples/index.js
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+v0.0.1 - First very alpha!
+v0.0.2 - Added some more functionality to the api
 
 ## License
 Copyright (c) 2014 Ben Zörb. Licensed under the MIT license.
