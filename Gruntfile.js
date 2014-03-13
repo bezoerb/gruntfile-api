@@ -8,9 +8,6 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        nodeunit: {
-            files: ['test/**/*_test.js']
-        },
         // Unit tests.
         simplemocha: {
             options: {
@@ -34,7 +31,7 @@ module.exports = function(grunt) {
                 src: ['lib/**/*.js']
             },
             test: {
-                src: ['test/**/*.js', '!test/fixtures/**/*.js']
+                src: ['test/**/*.js', '!test/fixtures/**/*.js', '!test/expected/**/*.js']
             }
         },
         watch: {
@@ -54,12 +51,8 @@ module.exports = function(grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'simplemocha','nodeunit']);
+    grunt.registerTask('default', ['jshint', 'simplemocha']);
 
-    grunt.registerTask('test', function() {
-        grunt.task.run(['jshint']);
-
-    });
 
 
 };
