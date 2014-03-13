@@ -10,33 +10,33 @@
 'use strict';
 /*jshint -W098 */
 /* global describe, it, before, grunt */
-var api,
+var api = require('../lib/api.js'),
     expect = require('chai').expect,
     assert = require('chai').assert,
     fs = require('fs'),
     path = require('path');
 
+api.init(fs.readFileSync(path.join(__dirname, 'fixtures', 'Gruntfile.js'), 'utf-8').toString());
+
 /*
  Tests for registerTask
  */
 describe('hasTaskRegistered', function() {
-    // load gruntfile before each task
-    before(function(done) {
-        fs.readFile(path.join(__dirname, 'fixtures', 'Gruntfile.js'), function(err, output) {
-            if (err) {
-                throw err;
-            }
 
-            api = require('../lib/api.js').init(output.toString());
-            done();
-        });
-    });
-
-    it('should return true for ever registered task', function() {
+    it('should return true for every registered task', function() {
         var expected = ['server','test','build','default'];
 
         expected.forEach(function(identifier){
             assert.ok(api.hasTaskRegistered(identifier),'It should have task "' + identifier + '" registered');
+        });
+
+    });
+
+    it('should return false when task is not registered', function() {
+        var expected = ['mocha'];
+
+        expected.forEach(function(identifier){
+            assert.notOk(api.hasTaskRegistered(identifier),'It should not have task "' + identifier + '" registered');
         });
 
     });

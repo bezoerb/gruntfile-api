@@ -10,27 +10,18 @@
 'use strict';
 /*jshint -W098 */
 /* global describe, it, before, grunt */
-var api,
+var api = require('../lib/api.js'),
     expect = require('chai').expect,
     assert = require('chai').assert,
     fs = require('fs'),
     path = require('path');
 
+
+api.init(fs.readFileSync(path.join(__dirname, 'fixtures', 'Gruntfile.js'), 'utf-8').toString());
 /*
  Tests for registerTask
  */
 describe('hasConfig', function() {
-    // load gruntfile before each task
-    before(function(done) {
-        fs.readFile(path.join(__dirname, 'fixtures', 'Gruntfile.js'), function(err, output) {
-            if (err) {
-                throw err;
-            }
-
-            api = require('../lib/api.js').init(output.toString());
-            done();
-        });
-    });
 
     it('should return true for ever configured task', function() {
         var expected = ['yeoman','clean','watch','less','php2html','jshint','mocha','bower','requirejs','modernizr',
