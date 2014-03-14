@@ -121,7 +121,9 @@ grunt.registerTask('default', function(target) {
 ### Insert task config
 
 Insert Task configuration to the Gruntfile.
-Existing configurations should not be overwritten.
+Existing configurations should not be overwritten. That means, that the task target is added to the config if it already exists.
+Options will be added to the target configuration when the task already exists so that any existing configuration won't be messed up.
+Options that are already configured identically in the global task options will be dropped.
 Keep in mind that variable names or function calls will be evaluated when passed toe the function line this
 When there's the need for variables or date objects use `insertRawConfig`
 

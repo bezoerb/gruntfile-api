@@ -12,7 +12,7 @@
 var api = require('../lib/api.js'),
     fs = require('fs'),
     beautify = require('js-beautify').js_beautify,
-    gruntfile = fs.readFileSync('test/fixtures/plain_task.js', 'utf-8').toString(),
+    gruntfile = fs.readFileSync('test/fixtures/plain_task_withoptions.js', 'utf-8').toString(),
     multiline = require('multiline');
 
 
@@ -20,14 +20,14 @@ var output = api.init(gruntfile)
     .insertConfig('less',{
         options: {
             paths: ['/styles'],
-            optimization: 1,
-            something: 3
+            optimization: 0
         },
         dist: {
-            options: {
-                test: 4,
-                optimization: 2
-            },
+            files: [
+                {expand: true, cwd:  '/styles', src: ['*.less'], dest: '.tmp/styles', ext: '.css'}
+            ]
+        },
+        all: {
             files: [
                 {expand: true, cwd:  '/styles', src: ['*.less'], dest: '.tmp/styles', ext: '.css'}
             ]
