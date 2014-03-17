@@ -17,6 +17,7 @@ var api = require('../lib/api.js'),
 
 
 var output = api.init(gruntfile)
+    .loadNpmTasks('less')
     .insertConfig('less',{
         options: {
             paths: ['/styles'],

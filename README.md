@@ -257,6 +257,21 @@ Type: `string`
 
 The task identifier
 
+### loadNpmTask
+
+Add loadNpmTasks call to Gruntfile.
+When `load-grunt-tasks` is active or the requested plugin is already loaded nothing will be added to the Gruntfile.
+
+```javascript
+api.loadNpmTasks(pluginName)
+```
+
+
+#### parameter.pluginName
+Type: `string`
+
+The plugin name
+
 ### Test Gruntfile for property inside task config
 
 Invalid JSON Objects like variables or functions will added as String for information purpose
