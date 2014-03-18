@@ -12,6 +12,7 @@
 /* global describe, it, before, grunt */
 var api = require('../lib/api.js'),
     expect = require('chai').expect,
+    assert = require('chai').assert,
     fs = require('fs'),
     path = require('path');
 
@@ -80,6 +81,19 @@ describe('addGlobalDeclaration', function() {
             .toString();
 
         expect(output).to.equal(rfs('expected/addGlobalDeclaration-5.js'));
+    });
+
+    it('should throw an exception if variable already declared', function() {
+        var gruntfile = fs.readFileSync(path.join(__dirname, 'fixtures', 'plain_vars.js'));
+        try {
+            var output = api.init(gruntfile)
+                .addGlobalDeclaration('test', 42)
+                .addGlobalDeclaration('test', 42);
+
+            assert.fail('Should throw an exception');
+        } catch (err) {
+            assert.ok('Passed :)');
+        }
     });
 
 });

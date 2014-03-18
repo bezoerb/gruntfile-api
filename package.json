@@ -1,49 +1,49 @@
 {
-    "name": "gruntfile-api",
-    "version": "0.0.3",
-    "main": "lib/api.js",
-    "description": "Api to programmatically modify a gruntfile",
-    "homepage": "https://github.com/bezoerb/gruntfile-api",
-    "bugs": "https://github.com/bezoerb/gruntfile-api/issues",
-    "author": {
-        "name": "Ben Zörb",
-        "email": "ben@sommerlaune.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/bezoerb/gruntfile-api.git"
-    },
-    "licenses": [
-        {
-            "type": "MIT"
-        }
-    ],
-    "keywords": [
-        "grunt",
-        "gruntfile",
-        "yeoman",
-        "api"
-    ],
-    "dependencies": {
-        "lodash": "~2.4.1",
-        "traverse": "^0.6.6",
-        "escodegen": "git://github.com/bezoerb/escodegen.git#object-comments",
-        "esprima": "~1.0.4"
-    },
-    "devDependencies": {
-        "grunt-contrib-jshint": "~0.7.0",
-        "grunt-contrib-nodeunit": "~0.2.0",
-        "grunt-contrib-watch": "~0.5.0",
-        "load-grunt-tasks": "~0.2.0",
-        "time-grunt": "~0.2.0",
-        "jshint-stylish": "^0.1.5",
-        "js-beautify": "*",
-        "multiline": "^0.2.0",
-        "grunt-simple-mocha": "^0.4.0",
-        "mocha": "^1.17.1",
-        "chai": "^1.9.0"
-    },
-    "scripts": {
-        "test": "grunt"
+  "name": "gruntfile-api",
+  "version": "0.0.3",
+  "main": "lib/api.js",
+  "description": "Api to programmatically modify a gruntfile",
+  "homepage": "https://github.com/bezoerb/gruntfile-api",
+  "bugs": "https://github.com/bezoerb/gruntfile-api/issues",
+  "author": {
+    "name": "Ben Zörb",
+    "email": "ben@sommerlaune.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bezoerb/gruntfile-api.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
     }
+  ],
+  "keywords": [
+    "grunt",
+    "gruntfile",
+    "yeoman",
+    "api"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "traverse": "^0.6.6",
+    "escodegen": "git://github.com/bezoerb/escodegen.git#object-comments",
+    "esprima": "~1.0.4"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.7.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.0",
+    "load-grunt-tasks": "~0.2.0",
+    "time-grunt": "~0.2.0",
+    "jshint-stylish": "^0.1.5",
+    "multiline": "^0.2.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "mocha": "^1.17.1",
+    "chai": "^1.9.0",
+    "esformatter": "0.0.16"
+  },
+  "scripts": {
+    "test": "grunt"
+  }
 }

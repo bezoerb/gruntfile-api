@@ -11,12 +11,17 @@
 
 var api = require('../lib/api.js'),
     fs = require('fs'),
-    beautify = require('js-beautify').js_beautify,
-    gruntfile = fs.readFileSync('test/fixtures/plain_task_withoptions.js', 'utf-8').toString(),
+    esformatter = require('esformatter'),
+    gruntfile = fs.readFileSync('test/fixtures/Gruntfile.js', 'utf-8').toString(),
     multiline = require('multiline');
 
 
 var output = api.init(gruntfile)
+
+    .addGlobalDeclaration('test1',[3,4,5,(new Date()).getTime()])
+    .addGlobalDeclaration('test2',42)
+    .addGlobalDeclaration('test3','abc')
+    .addGlobalDeclaration('test4',function(test){ return test * test; })
     .loadNpmTasks('less')
     .insertConfig('less',{
         options: {
@@ -37,6 +42,28 @@ var output = api.init(gruntfile)
     }).toString();
 
 console.log(output);
+console.log('---------');
+
+// for a list of available options check "lib/preset/default.json"
+var options = {
+    // inherit from the default preset
+    preset : 'default',
+    indent : {
+        value : '  '
+    },
+    lineBreak : {
+        before : {
+            BlockStatement : 1,
+            DoWhileStatementOpeningBrace : 1
+        }
+    },
+    whiteSpace : {
+    }
+};
+
+var formattedCode = esformatter.format(output,options);
+
+console.log(formattedCode);
 
 //
 //var output = api.init(gruntfile)
