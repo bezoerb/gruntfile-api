@@ -1,6 +1,6 @@
 {
   "name": "gruntfile-api",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "lib/api.js",
   "description": "Api to programmatically modify a gruntfile",
   "homepage": "https://github.com/bezoerb/gruntfile-api",
