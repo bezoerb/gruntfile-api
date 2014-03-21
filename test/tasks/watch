@@ -1,0 +1,6 @@
+{
+    sprite: {
+        files: ['<%= imgDir %>/spritefiles/**/*.{png,jpg,gif}'],
+        tasks: ['spritesmith']
+    }
+}

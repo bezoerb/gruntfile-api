@@ -16,33 +16,12 @@ var api = require('../lib/api.js'),
     multiline = require('multiline');
 
 
-var output = api.init(gruntfile)
+var output = api.init(gruntfile).toString();
 
-    .addGlobalDeclaration('test1',[3,4,5,(new Date()).getTime()])
-    .addGlobalDeclaration('test2',42)
-    .addGlobalDeclaration('test3','abc')
-    .addGlobalDeclaration('test4',function(test){ return test * test; })
-    .loadNpmTasks('less')
-    .insertConfig('less',{
-        options: {
-            paths: ['/styles'],
-            optimization: 0
-        },
-        dist: {
-            files: [
-                {expand: true, cwd:  '/styles', src: ['*.less'], dest: '.tmp/styles', ext: '.css'}
-            ]
-        },
-        all: {
-            files: [
-                {expand: true, cwd:  '/styles', src: ['*.less'], dest: '.tmp/styles', ext: '.css'}
-            ]
-        }
+api.hasConfigProperty('open','app');
 
-    }).toString();
-
-console.log(output);
-console.log('---------');
+//console.log(output);
+//console.log('---------');
 
 // for a list of available options check "lib/preset/default.json"
 var options = {
@@ -63,7 +42,7 @@ var options = {
 
 var formattedCode = esformatter.format(output,options);
 
-console.log(formattedCode);
+//console.log(formattedCode);
 
 //
 //var output = api.init(gruntfile)

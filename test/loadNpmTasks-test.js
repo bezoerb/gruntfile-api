@@ -13,11 +13,19 @@
 var api = require('../lib/api.js'),
     expect = require('chai').expect,
     fs = require('fs'),
+    esformatter = require('esformatter'),
     path = require('path');
 
 /* Read file sync sugar. */
 var rfs = function(file) {
     return fs.readFileSync(path.join(__dirname, file), 'utf-8').toString();
+};
+
+var testOutput = function testOutput(output,filename) {
+    var expected = rfs('expected/' + filename);
+    expected = esformatter.format(expected);
+    output = esformatter.format(output);
+    expect(output).to.equal(expected);
 };
 
 /*
@@ -31,7 +39,8 @@ describe('loadNpmTasks', function() {
             .loadNpmTasks('grunt-contrib-jshint')
             .toString();
 
-        expect(output).to.equal(rfs('expected/loadNpmTasks-1.js'));
+//        expect(output).to.equal(rfs('expected/loadNpmTasks-1.js'));
+        testOutput(output,'loadNpmTasks-1.js');
     });
 
     it('should not add already added loadNpmTasks', function() {
@@ -41,6 +50,7 @@ describe('loadNpmTasks', function() {
             .loadNpmTasks('grunt-contrib-jshint')
             .toString();
 
-        expect(output).to.equal(rfs('expected/loadNpmTasks-1.js'));
+//        expect(output).to.equal(rfs('expected/loadNpmTasks-1.js'));
+        testOutput(output,'loadNpmTasks-1.js');
     });
 });

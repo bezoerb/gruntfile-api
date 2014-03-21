@@ -1,0 +1,23 @@
+{
+    sprite: {
+        options: {
+            width: '50%',
+                height: '50%',
+                overwrite: true
+        },
+        files: [
+            {
+                expand: true,
+                cwd: '/app/sdt/sprites/',
+                src: ['*@2x.png'],
+                dest: '/app/sdt/sprites/',
+                filter: 'isFile',
+                // If specified, this function will be responsible for returning the final
+                // dest filepath. By default, it joins dest and matchedSrcPath like so:
+                rename: function(dest, matchedSrcPath) {
+                    return path.join(dest, matchedSrcPath.replace(/@2x\.png/, '.png'));
+                }
+            }
+        ]
+    }
+}

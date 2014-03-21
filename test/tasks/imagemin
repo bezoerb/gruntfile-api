@@ -1,0 +1,13 @@
+{
+    sprite: {
+        files: [
+            {
+                expand: true,
+                cwd: '/app/sdt/sprites/',
+                src: '*.png',
+                dest: '/app/sdt/sprites/'
+            }
+        ]
+    }
+
+}

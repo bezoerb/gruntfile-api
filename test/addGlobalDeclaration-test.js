@@ -14,11 +14,20 @@ var api = require('../lib/api.js'),
     expect = require('chai').expect,
     assert = require('chai').assert,
     fs = require('fs'),
+    esformatter = require('esformatter'),
     path = require('path');
 
 /* Read file sync sugar. */
-var rfs = function(file) {
+var rfs = function rfs(file) {
     return fs.readFileSync(path.join(__dirname, file), 'utf-8').toString();
+};
+
+
+var testOutput = function testOutput(output,filename) {
+    var expected = rfs('expected/' + filename);
+    expected = esformatter.format(expected);
+    output = esformatter.format(output);
+    expect(output).to.equal(expected);
 };
 
 /*
@@ -32,7 +41,7 @@ describe('addGlobalDeclaration', function() {
             .addGlobalDeclaration('test', 42)
             .toString();
 
-        expect(output).to.equal(rfs('expected/addGlobalDeclaration-1.js'));
+        testOutput(output,'addGlobalDeclaration-1.js');
     });
 
     it('should add multiple global declarations', function() {
@@ -43,7 +52,7 @@ describe('addGlobalDeclaration', function() {
             .addGlobalDeclaration('test2', 44)
             .toString();
 
-        expect(output).to.equal(rfs('expected/addGlobalDeclaration-2.js'));
+        testOutput(output,'addGlobalDeclaration-2.js');
     });
 
     it('should add global declarations of different types', function() {
@@ -58,7 +67,7 @@ describe('addGlobalDeclaration', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/addGlobalDeclaration-3.js'));
+        testOutput(output,'addGlobalDeclaration-3.js');
     });
 
     it('should integrate with comma separated vars', function() {
@@ -69,7 +78,7 @@ describe('addGlobalDeclaration', function() {
             .addGlobalDeclaration('test2', 44)
             .toString();
 
-        expect(output).to.equal(rfs('expected/addGlobalDeclaration-4.js'));
+        testOutput(output,'addGlobalDeclaration-4.js');
     });
 
     it('should integrate with multiple var statements', function() {
@@ -80,7 +89,7 @@ describe('addGlobalDeclaration', function() {
             .addGlobalDeclaration('test2', 44)
             .toString();
 
-        expect(output).to.equal(rfs('expected/addGlobalDeclaration-5.js'));
+        testOutput(output,'addGlobalDeclaration-5.js');
     });
 
     it('should throw an exception if variable already declared', function() {

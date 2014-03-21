@@ -1,0 +1,83 @@
+ {
+    options: {
+        // OPTIONAL: Specify algorithm (top-down, left-right, diagonal [\ format],
+        // alt-diagonal [/ format], binary-tree [best packing])
+        // Visual representations can be found below
+        'algorithm': 'top-down',
+
+            // skip function declraration
+            cssOpts: {
+            'functions': false
+        },
+
+        // OPTIONAL: Specify img options
+        'imgOpts': {
+            // Format of the image (inferred from destImg' extension by default) (jpg, png)
+            'format': 'png',
+
+                // Quality of image (gm only)
+                'quality': 90
+        }
+    },
+
+    default: {
+        'cssFormat': 'less',
+        // OPTIONAL: Specify padding between images
+        'padding': 50,
+        // Sprite files to read in
+        'src': ['/app/sdt/spritefiles/default/*.{png,jpg,gif}'],
+
+        // Location to output spritesheet
+        'destImg': '/app/sdt/sprites/sprite.default.png',
+        
+        'destCSS': '/app/images/sprite-variables.default.less',
+        'cssTemplate': '/app/images/helper/sprite.less.template.mustache',
+
+        // OPTIONAL: Manual override for imgPath specified in CSS
+        'imgPath': '//app/sdt/sprites/sprite.default.png',
+
+        // OPTIONAL: Map variable of each sprite
+        'cssVarMap': function(sprite) {
+            // `sprite` has `name`, `image` (full path), `x`, `y`
+            //   `width`, `height`, `total_width`, `total_height`
+            // EXAMPLE: Prefix all sprite names with 'sprite-'
+            sprite.name = 'default-' + sprite.name.replace(/\s/, '_');
+
+        }
+    },
+    retina: {
+        'cssFormat': 'less',
+        // OPTIONAL: Specify padding between images
+        'padding': 50,
+
+        // Sprite files to read in
+        'src': ['/app/sdt/spritefiles/2x/*.{png,jpg,gif}'],
+
+        // Location to output spritesheet
+        'destImg': '/app/sdt/sprites/sprite.retina@2x.png',
+        
+        'destCSS': '/app/images/sprite-variables.retina.less',
+        'cssTemplate': '/app/images/helper/retina-sprite.less.template.mustache',
+
+        'imgPath': '/app/sdt/sprites/sprite.retina@2x.png',
+
+        // OPTIONAL: Map variable of each sprite
+        'cssVarMap': function(sprite) {
+            // `sprite` has `name`, `image` (full path), `x`, `y`
+            //   `width`, `height`, `total_width`, `total_height`
+            // EXAMPLE: Prefix all sprite names with 'sprite-'
+            sprite.name = 'retina-' + sprite.name.replace(/\s/, '_');
+            sprite.width = sprite.width / 2;
+            sprite.height = sprite.height / 2;
+            sprite.total_width = sprite.total_width / 2;
+            sprite.total_height = sprite.total_height / 2;
+            sprite.x = sprite.x / 2;
+            sprite.y = sprite.y / 2;
+            sprite.image2x = sprite.image.replace(/['"\(\)\s]/g, function encodeCssUri(chr) {
+                return '%' + chr.charCodeAt(0).toString(16);
+            });
+            sprite.image = sprite.image.replace(/@2x/, '');
+
+        }
+    }
+}

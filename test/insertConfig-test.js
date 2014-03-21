@@ -15,12 +15,21 @@ var api = require('../lib/api.js'),
     fs = require('fs'),
     path = require('path'),
     multiline = require('multiline'),
+    esformatter = require('esformatter'),
     gruntfile;
 
 /* Read file sync sugar. */
 var rfs = function(file) {
     return fs.readFileSync(path.join(__dirname, file), 'utf-8').toString();
 };
+
+var testOutput = function testOutput(output,filename) {
+    var expected = rfs('expected/' + filename);
+    expected = esformatter.format(expected);
+    output = esformatter.format(output);
+    expect(output).to.equal(expected);
+};
+
 
 /*
  Tests for registerTask
@@ -42,7 +51,9 @@ describe('inserConfig', function() {
             .insertConfig('nodeunit', {files: ['test/**/*_test.js']})
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+
+        testOutput(output,'insertConfig-1.js');
     });
 
     it('should add nodeunit config only once', function() {
@@ -51,7 +62,8 @@ describe('inserConfig', function() {
             .insertConfig('nodeunit', {files: ['test/**/*_test.js']})
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+        testOutput(output,'insertConfig-1.js');
     });
 
     it('should add nodeunit config only once with diferent targets', function() {
@@ -60,7 +72,9 @@ describe('inserConfig', function() {
             .insertConfig('nodeunit', {otherFiles: ['test/**/*_test.js']})
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-2.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-2.js'));
+
+        testOutput(output,'insertConfig-2.js');
     });
 
     it('should add multiple configs', function() {
@@ -82,7 +96,8 @@ describe('inserConfig', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-3.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-3.js'));
+        testOutput(output,'insertConfig-3.js');
     });
 
     it('should add rawnodeunit config', function() {
@@ -90,7 +105,8 @@ describe('inserConfig', function() {
             .insertRawConfig('nodeunit', "{files: ['test/**/*_test.js']}")
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+        testOutput(output,'insertConfig-1.js');
     });
 
     it('should add raw nodeunit config only once', function() {
@@ -99,7 +115,9 @@ describe('inserConfig', function() {
             .insertRawConfig('nodeunit', "{files: ['test/**/*_test.js']}")
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-1.js'));
+
+        testOutput(output,'insertConfig-1.js');
     });
 
     it('should add raw nodeunit config only once with diferent targets', function() {
@@ -108,7 +126,9 @@ describe('inserConfig', function() {
             .insertRawConfig('nodeunit', "{otherFiles: ['test/**/*_test.js']}")
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-2.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-2.js'));
+
+        testOutput(output,'insertConfig-2.js');
     });
 
     it('should add raw nodeunit config with date function', function() {
@@ -116,7 +136,9 @@ describe('inserConfig', function() {
             .insertRawConfig('init', "{time: (new Date()).getTime()}")
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-4.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-4.js'));
+
+        testOutput(output,'insertConfig-4.js');
     });
 
     it('should add raw nodeunit config with date function, variable and array', function() {
@@ -135,7 +157,9 @@ describe('inserConfig', function() {
             }))
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-5.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-5.js'));
+
+        testOutput(output,'insertConfig-5.js');
     });
 
 
@@ -154,7 +178,9 @@ describe('inserConfig', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-6.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-6.js'));
+
+        testOutput(output,'insertConfig-6.js');
     });
 
     it('should append options to target when task config exists', function() {
@@ -170,7 +196,9 @@ describe('inserConfig', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-7.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-7.js'));
+
+        testOutput(output,'insertConfig-7.js');
     });
 
     it('should append no options to target when all are already defined', function() {
@@ -186,7 +214,9 @@ describe('inserConfig', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-8.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-8.js'));
+
+        testOutput(output,'insertConfig-8.js');
     });
 
     it('should append all options to target', function() {
@@ -203,7 +233,9 @@ describe('inserConfig', function() {
             })
             .toString();
 
-        expect(output).to.equal(rfs('expected/insertConfig-9.js'));
+//        expect(output).to.equal(rfs('expected/insertConfig-9.js'));
+        testOutput(output,'insertConfig-9.js');
+
     });
 
 });

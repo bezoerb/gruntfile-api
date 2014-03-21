@@ -17,6 +17,8 @@ var api = require('../lib/api.js'),
     path = require('path');
 
 
+
+
 api.init(fs.readFileSync(path.join(__dirname, 'fixtures', 'Gruntfile.js'), 'utf-8').toString());
 /*
  Tests for registerTask
