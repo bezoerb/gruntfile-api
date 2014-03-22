@@ -12,13 +12,15 @@
 var api = require('../lib/api.js'),
     fs = require('fs'),
     esformatter = require('esformatter'),
-    gruntfile = fs.readFileSync('test/fixtures/Gruntfile.js', 'utf-8').toString(),
+    gruntfile = fs.readFileSync('test/fixtures/plain.js', 'utf-8').toString(),
     multiline = require('multiline');
 
 
-var output = api.init(gruntfile).toString();
+var output = api.init(gruntfile)
+    .addGlobalDeclarationRaw('path','require(\'path\')')
+    .toString();
 
-api.hasConfigProperty('open','app');
+
 
 //console.log(output);
 //console.log('---------');
@@ -42,7 +44,7 @@ var options = {
 
 var formattedCode = esformatter.format(output,options);
 
-//console.log(formattedCode);
+console.log(formattedCode);
 
 //
 //var output = api.init(gruntfile)
