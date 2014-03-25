@@ -2,8 +2,6 @@
 
 Api to programmatically modify your gruntfile
 
-THIS IS IN VERY EARLY DEVELOPMENT
-
 
 ## Getting Started
 Install the module with: `npm install gruntfile-api`
