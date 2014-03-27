@@ -20,10 +20,26 @@ var output = api.init(gruntfileData)
 
 ## Documentation
 
+### Overview
+
+- [Add global declaration](#add-global-declaration)
+- [Add RAW global declaration](#add-raw-global-declaration)
+- [Register task](#register-task)
+- [Insert task config](#insert-task-config)
+- [Insert RAW task config](#insert-raw-task-config)
+- [Get the updated Gruntfile content](#get-the-updated-gruntfile-content)
+- [Get JSON object with all configured tasks](#get-json-object-with-all-configured-tasks)
+- [Test Gruntfile for task config](#test-gruntfile-for-task-config)
+- [loadNpmTask](#loadnpmtask)
+- [Test Gruntfile for property inside task config](#test-gruntfile-for-property-inside-task-config)
+
 ### Add global declaration
 
 Add a global variable declaration to the gruntfile.
-declarations get seamlessly integrated into existing declaration structures
+declarations get seamlessly integrated into existing declaration structures.
+Keep in mind that function calls like `require('module')` will be evaluated when passed to the function line this
+Use ['addGlobalDeclarationRaw`](#add-raw-global-declaration) to prevent evaluation.
+
 
 ```javascript
 api.addGlobalDeclaration(identifier,value)
@@ -50,6 +66,32 @@ or
 var varA = 'something',
     varB = 'something else',
     defaultTasks = ['jshint','uglify'];
+```
+
+### Add RAW global declaration
+
+Add a global variable declaration to the gruntfile.
+declarations get seamlessly integrated into existing declaration structures
+
+```javascript
+api.addGlobalDeclarationRaw(identifier,value)
+```
+#### parameter.identifier
+Type: `string`
+
+#### parameter.value
+Type: `string`
+
+### example
+
+```javascript
+api.addGlobalDeclaration('path','require(\'path\')')
+```
+
+adds the following code right before `module.exports = function (grunt)`
+
+```javascript
+var path = require('path');
 ```
 
 ### Register task
@@ -124,8 +166,8 @@ Insert Task configuration to the Gruntfile.
 Existing configurations should not be overwritten. That means, that the task target is added to the config if it already exists.
 Options will be added to the target configuration when the task already exists so that any existing configuration won't be messed up.
 Options that are already configured identically in the global task options will be dropped.
-Keep in mind that variable names or function calls will be evaluated when passed toe the function line this
-When there's the need for variables or date objects use `insertRawConfig`
+Keep in mind that variable names or function calls will be evaluated when passed to the function line this
+When there's the need for variables or date objects use [`insertRawConfig`](#insert-raw-task-config)
 
 
 ```javascript
