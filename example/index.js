@@ -11,7 +11,6 @@
 
 var api = require('../lib/api.js'),
     fs = require('fs'),
-    esformatter = require('esformatter'),
     gruntfile = fs.readFileSync('test/fixtures/Gruntfile.js', 'utf-8').toString(),
     multiline = require('multiline');
 
