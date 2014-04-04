@@ -16,20 +16,7 @@ var api = require('../lib/api.js'),
 
 
 var output = api.init(gruntfile)
-    .insertRawConfig('watch', multiline(function(){/*
-        {
-            // ADD TEST COMMENT
-            js: {
-                // main options
-                options: {
-                    time: (new Date()).getTime()
-                },
-                // some other stuff
-                files: MYPREVIOUSDECLAREDFILES,
-                tasks: ['jshint']
-            }
-        }
-    */}))
+    .addGlobalDeclarationRaw('path','require("path")')
     .toString();
 
 

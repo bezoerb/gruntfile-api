@@ -1,8 +1,14 @@
 'use strict';
 
-var LIVERELOAD_PORT,lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT}),
+var LIVERELOAD_PORT = 35729,
     gateway = require('gateway'),
-    path = require('path');
+    lrSnippet = require('connect-livereload')({
+        port: LIVERELOAD_PORT
+    }),
+    mountFolder = function(connect, dir) {
+        var path = require('path').resolve(dir);
+        return connect.static(path);
+    };
 
 
 module.exports = function (grunt) {
