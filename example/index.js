@@ -11,9 +11,8 @@
 
 var api = require('../lib/api.js'),
     fs = require('fs'),
-    gruntfile = fs.readFileSync('test/fixtures/Gruntfile.js', 'utf-8').toString(),
+    gruntfile = fs.readFileSync('test/fixtures/plain_var_scope.js', 'utf-8').toString(),
     multiline = require('multiline');
-
 
 var output = api.init(gruntfile)
     .addGlobalDeclarationRaw('path','require("path")')

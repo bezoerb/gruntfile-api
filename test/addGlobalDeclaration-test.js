@@ -105,4 +105,13 @@ describe('addGlobalDeclaration', function() {
         }
     });
 
+    it('should add declaration when variable is declared in another scope', function() {
+        var gruntfile = fs.readFileSync(path.join(__dirname, 'fixtures', 'plain_var_scope.js'));
+        var output = api.init(gruntfile)
+            .addGlobalDeclarationRaw('path','require("path")')
+            .toString();
+
+        testOutput(output,'addGlobalDeclaration-6.js');
+    });
+
 });
