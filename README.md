@@ -1,4 +1,4 @@
-# gruntfile-api [![Build Status](https://secure.travis-ci.org/bezoerb/gruntfile-api.png?branch=master)](http://travis-ci.org/bezoerb/gruntfile-api)
+# gruntfile-api [![NPM version](https://badge.fury.io/js/gruntfile-api.svg)](http://badge.fury.io/js/gruntfile-api) [![Build Status](https://secure.travis-ci.org/bezoerb/gruntfile-api.svg?branch=master)](http://travis-ci.org/bezoerb/gruntfile-api) [![dependencies](https://david-dm.org/bezoerb/gruntfile-api.svg?theme=shields.io)](https://david-dm.org/bezoerb/gruntfile-api)
 
 Api to programmatically modify your gruntfile
 
