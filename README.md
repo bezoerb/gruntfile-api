@@ -23,6 +23,7 @@ var output = api.init(gruntfileData)
 - [Add global declaration](#add-global-declaration)
 - [Add RAW global declaration](#add-raw-global-declaration)
 - [Register task](#register-task)
+- [Remove task](#remove-task)
 - [Insert task config](#insert-task-config)
 - [Insert RAW task config](#insert-raw-task-config)
 - [Get the updated Gruntfile content](#get-the-updated-gruntfile-content)
@@ -157,6 +158,14 @@ grunt.registerTask('default', function(target) {
 };
 ```
 
+### Remove Task
+
+Remove an existing tasks from the Gruntfile's registered tasks, task lists and configuration.
+
+```
+api.removeTask('someTask');
+api.removeTask('someTask', false); //=> don't remove the task's configuration
+```
 
 ### Insert task config
 
